@@ -1,0 +1,62 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f0f4f8;
+        color: #f0f0f0;
+    }
+
+    h1 {
+        font-size: 2rem;
+        color: #0056b3;
+        display: flex;
+        justify-content: space-between; 
+        align-items: center;
+    }
+
+    h1 a {
+        color: #0056b3;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    h1 a:hover {
+        text-decoration: underline;
+    }
+
+    ul {
+        list-style-type: disc;
+        padding-left: 30px;
+    }
+
+    li {
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+
+    li::marker {
+        font-size: 1.5rem;
+        color: #0056b3; /* Green bullets */
+    }
+
+    a {
+        color: #3498db;
+        text-decoration: none;
+        font-size: 1.2rem;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<h1>
+    Available Reports
+    <a href="/">Back to Dashboard</a> <!-- This will be aligned to the right -->
+</h1>
+<ul>
+    {% for report in reports %}
+    <li><a href="/reports/{{ report }}" target="_blank">{{ report }}</a></li>
+    {% endfor %}
+</ul>

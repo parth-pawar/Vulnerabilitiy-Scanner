@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Scanner Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #0056b3;
+        }
+    
+        a {
+            color: #0056b3;
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+    
+        a:hover {
+            text-decoration: underline;
+        }
+    
+        form {
+            background-color: #ffffff; 
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #333333;
+        }
+    
+        input[type="text"],
+        input[type="datetime-local"] {
+            width: 93%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc; 
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333333;
+        }
+    
+        input[type="text"]::placeholder {
+            color: #aaaaaa;
+        }
+    
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+    
+        .radio-group input[type="radio"] {
+            margin-right: 10px;
+        }
+    
+        .checkbox-group label {
+            color: #333333; 
+        }
+    
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #0056b3; 
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+    
+        button[type="submit"]:hover {
+            background-color: #003d80; 
+        }
+    
+        #schedule-options {
+            display: none;
+        }
+    </style>
+        
+    <script>
+        function toggleScheduleOptions() {
+            const checkbox = document.getElementById("schedule_checkbox");
+            const scheduleOptions = document.getElementById("schedule-options");
+            const form = document.querySelector("form");
+            const button = document.getElementById("scan_btn");
+
+            if (checkbox.checked) {
+                scheduleOptions.style.display = "block";
+                form.action = "/schedule_scan";
+                button.textContent = "Schedule Scan";
+            } else {
+                scheduleOptions.style.display = "none";
+                form.action = "/";
+                button.textContent = "Start Scan";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Web Vulnerability Scanner</h1>
+    <a href="/reports">View Reports</a>
+    <form method="POST">
+        <label for="target_url">Target URL:</label>
+        <input type="text" id="target_url" name="target_url" placeholder="Enter the target URL" required>
+
+        <div class="radio-group">
+            <label><input type="radio" name="scan_type" value="spider" required> Spider Scan</label>
+            <label><input type="radio" name="scan_type" value="ascan" required> Active Scan</label>
+            <label><input type="radio" name="scan_type" value="pscan" required> Passive Scan</label>
+            <label><input type="radio" name="scan_type" value="sql_injection" required> SQL Injection</label>
+            <label><input type="radio" name="scan_type" value="xss" required> XSS Scan</label>
+            <label><input type="radio" name="scan_type" value="ajaxSpider" required> AJAX Spider</label>
+        </div>
+
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" id="schedule_checkbox" onclick="toggleScheduleOptions()"> Schedule Scan
+            </label>
+        </div>
+
+        <div id="schedule-options">
+            <label for="schedule_datetime">Schedule Date and Time:</label>
+            <input type="datetime-local" id="schedule_datetime" name="scheduled_datetime">
+        </div>
+
+        <button type="submit" id="scan_btn">Start Scan</button>
+    </form>
+</body>
+</html>

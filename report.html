@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Report</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f4f8;
+            color: #333; /* Adjusted text color for better readability */
+        }
+        h1 {
+            color: #0056b3;
+            margin: 0;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a {
+            margin-left: 15px;
+            color: #0056b3;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #2c2c2c;
+            color: #f0f0f0;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #444;
+            text-align: left;
+        }
+        th {
+            background-color: #444;
+        }
+        .severity-high {
+            background-color: #ff8888;
+            color: #1e1e1e;
+        }
+        .severity-medium {
+            background-color: #ffe1a5;
+            color: #1e1e1e;
+        }
+        .severity-low {
+            background-color: #c0ffc0;
+            color: #1e1e1e;
+        }
+        .severity-informational {
+            background-color: #92c1e0;
+            color: #1e1e1e;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        p {
+            font-size: 1rem;
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Vulnerability Scan Report</h1>
+        <div>
+            <a href="/"><b>Back to Dashboard</b></a>
+            <a href="{{pdf_url}}" target="_blank"><b>View PDF</b></a>
+            <a href="/reports"><b>View All Reports</b></a>
+        </div>
+    </div>
+
+    {% if alerts %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Alert Title</th>
+                    <th>Description</th>
+                    <th>Risk Level</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alert in alerts %}
+                    <tr class="{% if alert['risk'] == 'High' %}severity-high{% elif alert['risk'] == 'Medium' %}severity-medium{% elif alert['risk'] == 'Low' %}severity-low{% elif alert['risk'] == 'Informational' %}severity-informational{% endif %}">
+                        <td>{{ alert['alert'] }}</td>
+                        <td>{{ alert['description'] }}</td>
+                        <td>{{ alert['risk'] }}</td>
+                        <td>{{ alert['url'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No vulnerabilities found in the latest scan.</p>
+    {% endif %}
+
+    <br><br>
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>
