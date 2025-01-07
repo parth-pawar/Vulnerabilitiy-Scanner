@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Vulnerability Scanner Tool
 
 This is a locally hosted web application that integrates with [OWASP ZAP](https://www.zaproxy.org/) to scan websites for a variety of vulnerabilities. It provides different scan types (Spider, Active, Passive, SQL Injection, XSS, and more) and generates comprehensive reports categorizing vulnerabilities by severity.
@@ -70,6 +69,3 @@ Before setting up this tool, ensure you have the following installed:
   - **/public/schedule_success.html**: Confirms successful scan scheduling.
 - **requirements.txt**: List of required Python dependencies for the application.
 
-=======
-# Vulnerabilitiy-Scanner
->>>>>>> 8bbc2d98ab51266b6d673212393f417c2966003b
